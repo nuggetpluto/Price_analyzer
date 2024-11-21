@@ -1,5 +1,6 @@
 import os
 import csv
+import webbrowser
 
 
 class PriceAnalyzer:
@@ -176,5 +177,17 @@ if __name__ == "__main__":
         else:
             print("Товары не найдены.")
 
-    analyzer.export_to_html("output.html")
-    print("Данные экспортированы в файл output.html.")
+    while True:
+        export_choice = input("Нужно ли экспортировать данные в HTML? (y/n): ").strip().lower()
+        if export_choice in {"y", "n"}:
+            if export_choice == "y":
+                output_file = "output.html"
+                analyzer.export_to_html(output_file)
+                print("Данные экспортированы в файл output.html.")
+                # Открыть HTML-файл в браузере по умолчанию
+                webbrowser.open(output_file)
+            else:
+                print("Экспорт данных отменён.")
+            break
+        else:
+            print("Пожалуйста, введите 'y' (да) или 'n' (нет).")
